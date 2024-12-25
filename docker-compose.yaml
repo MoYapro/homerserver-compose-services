@@ -7,14 +7,14 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "67:67/udp"
-      - "80:80/tcp"
+      - "81:80/tcp"
     environment:
-      TZ: 'America/Chicago'
-      # WEBPASSWORD: 'set a secure password here or it will be random'
+      TZ: 'Europe/Berlin'
+      WEBPASSWORD: 'password'
     # Volumes store your data between container upgrades
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+      - './pihole-persistant-storage/etc-pihole:/etc/pihole'
+      - './pihole-persistant-storage/etc-dnsmasq.d:/etc/dnsmasq.d'
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN
