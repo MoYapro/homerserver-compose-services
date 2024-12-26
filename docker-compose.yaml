@@ -18,4 +18,13 @@ services:
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN
-    restart: unless-stopped # Recommended but not required (DHCP needs NET_ADMIN)  
+    restart: unless-stopped
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - './nginx-config/nginx.conf:/etc/nginx/nginx.conf:ro'
+      - './www:/www/data'
+    restart: unless-stopped
