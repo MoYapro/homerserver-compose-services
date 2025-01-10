@@ -3,3 +3,5 @@ pihole-persistant-storage
 .swp
 teamspeak-data
 teamspeak-db
+gitea
+mysql
