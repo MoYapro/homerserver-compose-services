@@ -37,10 +37,11 @@ services:
     container_name: syncthing
     hostname: my-syncthing
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
     volumes:
-      - /srv/dev-disk-by-uuid-cb77853f-27af-458f-9120-3bf9fb360d4d/thedisk:/var/syncthing
+      - /dev/zfs-pool-1/syncthing-data:/var/syncthing
+      - /root/homerserver-compose-services/syncthing-config:/var/syncthing/config
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
