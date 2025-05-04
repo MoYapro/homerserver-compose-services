@@ -13,6 +13,7 @@ services:
     environment:
       TZ: 'Europe/Berlin'
       WEBPASSWORD: 'password'
+      WEBHOME: 'http://server.fritz.box/admin/'
     # Volumes store your data between container upgrades
     volumes:
       - './pihole-persistant-storage/etc-pihole:/etc/pihole'
@@ -31,7 +32,7 @@ services:
       - './www:/www/data'
     restart: unless-stopped
     extra_hosts:
-      openmediavault.fritz.box: "192.168.178.6"
+      server.fritz.box: "192.168.178.6"
   syncthing:
     image: syncthing/syncthing
     container_name: syncthing
