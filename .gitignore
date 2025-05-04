@@ -6,3 +6,4 @@ teamspeak-db
 gitea
 mysql
 syncthing-config
+*.swp
