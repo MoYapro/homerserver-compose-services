@@ -13,7 +13,9 @@ services:
     environment:
       TZ: 'Europe/Berlin'
       WEBPASSWORD: 'password'
+      FTLCONF_dns_upstreams: 1.1.1.1;8.8.4.4
       WEBHOME: 'http://server.fritz.box/admin/'
+      WEBROOT: '/admin'
     # Volumes store your data between container upgrades
     volumes:
       - './pihole-persistant-storage/etc-pihole:/etc/pihole'
