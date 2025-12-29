@@ -52,3 +52,11 @@ services:
       interval: 1m
       timeout: 10s
       retries: 3
+  iperf3:
+    image: networkstatic/iperf3
+    container_name: iperf3-server
+    command: -s
+    ports:
+      - "5201:5201/tcp"
+      - "5201:5201/udp"
+    restart: unless-stopped
