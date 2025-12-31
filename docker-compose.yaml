@@ -1,25 +1,23 @@
 services:
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    network_mode: 'host'
-    environment:
-      TZ: 'Europe/Berlin'
-      WEBPASSWORD: 'password'
-      FTLCONF_webserver_api_password: 'password'
-      FTLCONF_dns_upstreams: 1.1.1.1;8.8.4.4
-      FTLCONF_webserver_paths_prefix: '/pihole'
-      FTLCONF_webserver_port: 81
-      WEBHOME: 'http://server.fritz.box/pihole/admin/'
-      WEBROOT: '/admin'
-    # Volumes store your data between container upgrades
-    volumes:
-      - './pihole-persistant-storage/etc-pihole:/etc/pihole'
-      - './pihole-persistant-storage/etc-dnsmasq.d:/etc/dnsmasq.d'
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - NET_ADMIN
-    restart: unless-stopped
+#  pihole:
+#    container_name: pihole
+#    image: pihole/pihole:latest
+#    network_mode: 'host'
+#    environment:
+#      TZ: 'Europe/Berlin'
+#      WEBPASSWORD: 'password'
+#      FTLCONF_webserver_api_password: 'password'
+#      FTLCONF_dns_upstreams: 1.1.1.1;8.8.4.4
+#      FTLCONF_webserver_paths_prefix: '/pihole'
+#      FTLCONF_webserver_port: 81
+#      WEBHOME: 'http://server.fritz.box/pihole/admin/'
+#      WEBROOT: '/admin'
+#    volumes:
+#      - './pihole-persistant-storage/etc-pihole:/etc/pihole'
+#      - './pihole-persistant-storage/etc-dnsmasq.d:/etc/dnsmasq.d'
+#    cap_add:
+#      - NET_ADMIN
+#    restart: unless-stopped
   nginx:
     container_name: nginx
     image: nginx:latest
@@ -60,3 +58,14 @@ services:
       - "5201:5201/tcp"
       - "5201:5201/udp"
     restart: unless-stopped
+  adguard:
+    image: adguard/adguardhome
+    ports:
+      - 53:53/tcp # plain dns over tcp
+      - 53:53/udp # plain dns over udp
+      - 3000:3000/tcp # initial setup web interface
+    container_name: adguardhome
+    restart: unless-stopped
+    volumes:
+      - ./adguard/work:/opt/adguardhome/work
+      - ./adguard/conf:/opt/adguardhome/conf
